@@ -5,9 +5,9 @@ from django.db import models
 class Task(models.Model):
 
     STATUS_CHOICES = [
-        ('turn', 'Очередь'),
-        ('in work', 'Выкуплено'),
-        ('done', 'Отмена')
+        ('Очередь', 'Очередь'),
+        ('В работе', 'В работе'),
+        ('Сделано', 'Сделано')
     ]
 
     summary = models.TextField(max_length=100, verbose_name="Краткое описание")
