@@ -1,22 +1,30 @@
 import React, {Component} from 'react';
 import {TASKS_URL} from "../../api-urls";
 import DatePicker from "react-datepicker";
+import Select from 'react-select';
 import axios from 'axios';
 
+const options = [
+  { value: 1, label: 'Очередь' },
+  { value: 2, label: 'В работе' },
+  { value: 3, label: 'Сделано' }
+];
 
-class TaskAdd extends Component {
+
+class TaskUpdate extends Component {
     state = {
         task: {
             summary: "",
             description: "",
             due_date: "",
             time_planned: "",
-            status: "Очередь"
+            status: ""
         },
 
         alert: null,
         submitDisabled: false
     };
+
 
     updateTaskState = (fieldName, value) => {
         this.setState(prevState => {
@@ -54,7 +62,7 @@ class TaskAdd extends Component {
         console.log(this.state.task);
 
 
-        axios.post(TASKS_URL, this.state.task)
+        axios.put(TASKS_URL, this.state.task)
             .then(response => {
                 console.log(response.data);
                 if (response.status === 201) return response.data;
@@ -66,7 +74,7 @@ class TaskAdd extends Component {
                 console.log(error);
                 this.setState(prevState => {
                     let newState = {...prevState};
-                    newState.alert = {type: 'danger', message: `Task was not added!`};
+                    newState.alert = {type: 'danger', message: `Movie was not added!`};
                     newState.submitDisabled = false;
                     return newState;
                 });
@@ -75,7 +83,7 @@ class TaskAdd extends Component {
 
     render() {
 
-        const {summary, description, due_date, time_planned} = this.state.task;
+        const {summary, description, due_date, time_planned, status} = this.state.task;
 
         let alert = null;
         if (this.state.alert) {
@@ -83,7 +91,9 @@ class TaskAdd extends Component {
         }
 
 
-        const due_date_selected = due_date ? new Date(due_date) : null;
+        const due_date_selected = due_date ? new Date(due_date) : null
+
+
 
 
 
@@ -113,6 +123,16 @@ class TaskAdd extends Component {
                                     name="time_planned" value={time_planned} onChange={this.inputChanged}/>
                     </div>
                 </div>
+                <div className="form-group">
+                    <label>Статус</label>
+                    <div>
+                        <Select
+                            name="status"
+                            onChange={(value) => this.updateTaskState('status', value.label)}
+                            options={options}
+                        />
+                    </div>
+                </div>
                 <button disabled={this.state.submitDisabled} type="submit"
                         className="btn btn-primary">Сохранить</button>
             </form>
@@ -121,4 +141,4 @@ class TaskAdd extends Component {
 }
 
 
-export default TaskAdd;
+export default TaskUpdate;

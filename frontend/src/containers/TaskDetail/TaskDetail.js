@@ -33,7 +33,7 @@ class TaskDetail extends Component {
             <p className="text-secondary">Сделать до: {due_date} за: {time_planned ? time_planned : "Неизвестно"} часов</p>
             {description ? <p>{description}</p> : null}
 
-            <NavLink to='' className="btn btn-primary">Tasks</NavLink>
+            <NavLink to='/update' className="btn btn-primary">Редактировать</NavLink>
         </div>;
     }
 }

@@ -20,4 +20,3 @@ class Task(models.Model):
     def __str__(self):
         return "%s %s %s" % (self.summary, self.due_date, self.status)
 
-
