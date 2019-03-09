@@ -95,7 +95,7 @@ class TaskDetail extends Component {
         ];
 
 
-        return <Container>
+        return <Container className="mt-3">
             {alert}
             <Form description={description} summary={summary} time_planned={time_planned} submit={this.formSubmitted}
                   change={this.inputChanged} due_date={due_date_selected}
