@@ -61,7 +61,7 @@ class TaskAdd extends Component {
                 throw new Error('Movie was not created');
             })
 
-            .then(task => this.props.history.replace('/tasks/' + task.id))
+            .then(task => this.props.history.replace('/tasks/'))
             .catch(error => {
                 console.log(error);
                 this.setState(prevState => {
